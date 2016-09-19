@@ -1,0 +1,6 @@
+div.rounded-container {
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #e7e7e7;
+}

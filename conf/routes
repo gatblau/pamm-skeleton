@@ -1,0 +1,23 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+#Default route for the index page
+GET     /                           controllers.Application.index()
+
+#Allows us to get assets from the public folder using the /assets pre-fix
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#Create shortcut routes for our web resource folders
+GET     /controllers/*file          controllers.Assets.at(path="/public/script/controllers", file)
+GET     /services/*file             controllers.Assets.at(path="/public/script/services", file)
+GET     /images/*file               controllers.Assets.at(path="/public/images", file)
+GET     /css/*file                  controllers.Assets.at(path="/public/css", file)
+
+#Webservices
+GET     /ws/hello                   controllers.HelloController.helloWorld()
+GET     /ws/helloMongo              controllers.MongoController.helloMongo()
+
+#Authentication Webservices
+POST    /ws/register                login.LoginController.register()
+GET    /ws/authenticate            login.LoginController.authenticate()

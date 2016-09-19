@@ -1,0 +1,18 @@
+  web:
+    image: pamm-skeleton
+    ports:
+      - "9000:9000"
+    links:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/
+
+  mongo:
+    image:
+      "mongo:2.4.14"
+    ports: 
+      - "27017:27017"
+    volumes:
+      - "~/mongo-data:/data/db"
+    command: 
+      "--smallfiles"

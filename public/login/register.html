@@ -1,0 +1,50 @@
+<div ng-controller="RegisterCtrl as register">
+
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 rounded-container register">
+        <h1>Registration</h1>
+        <p>Lets get started. Create your user account below.</p>
+
+        <!-- Registration popups -->
+        <div ng-show="!register.success && register.error" class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" aria-label="Close" ng-click="register.resetState()"><span aria-hidden="true">&times;</span></button>
+            <strong>Registration Failed</strong><br />
+            {{ register.error }}
+        </div>
+
+        <div ng-show="register.success" class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" aria-label="Close" ng-click="register.resetState()"><span aria-hidden="true">&times;</span></button>
+            <strong>Registration Successful!</strong><br />
+            Please login to the application.
+        </div>
+
+        <!-- Registration form -->
+        <form name="registerForm" class="form" ng-submit="register.registerUser(registerForm.$valid)" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.username.$invalid }">
+                <input name="username" type="text" class="form-control" ng-model="register.user.name" placeholder="Username" required>
+                <p class="help-block" ng-show="registerForm.$submitted && registerForm.username.$error.required">Please enter a username</p>
+            </div>
+            <p class="help-block">Password should be at least 6 characters and contain both a number and a letter</p>
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.password.$invalid }">
+                <input name="password" type="password" class="form-control" ng-model="register.user.password" placeholder="Password" required>
+                <p class="help-block" ng-show="registerForm.$submitted && registerForm.password.$error.required">Please enter a password</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.confirm_password.$invalid }">
+                <input name="confirm_password" type="password" class="form-control" ng-model="register.user.confirmPassword" placeholder="Confirm Password" required ui-validate=" '$value==register.user.password' " ui-validate-watch=" 'register.user.password' ">
+                <p class="help-block" ng-show="registerForm.$submitted && registerForm.confirm_password.$error.required">Please confirm your password</p>
+                <p class="help-block" ng-show="registerForm.$submitted && registerForm.confirm_password.$error.validator">Password does not match</p>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" >Register</button>
+            </div>
+        </form>
+
+        <a ui-sref="login"> <p> Already have an account? Log in. </p> </a>
+
+    </div>
+
+
+    </div>
+    <div class="col-sm-3"></div>
+</div>
